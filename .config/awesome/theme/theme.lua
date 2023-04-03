@@ -10,23 +10,35 @@ local theme = {}
 
 theme.font          = "monospace 8"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
-theme.bg_urgent     = "#ff0000"
+theme.bg_normal     = "#1c7091"
+theme.bg_focus      = "#4d6992"
+theme.bg_urgent     = "#ffc763"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
 
-theme.fg_normal     = "#aaaaaa"
-theme.fg_focus      = "#ffffff"
+theme.fg_normal     = "#ffffff"
+theme.fg_focus      = "#f5d477"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
 theme.gap_single_client = true
-theme.useless_gap   = dpi(2)
+theme.useless_gap   = dpi(1)
 theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
-theme.border_marked = "#91231c"
+theme.border_focus  = "#ffffff"
+
+theme.taglist_fg_focus = "#ffffff"
+theme.taglist_fg_urgent = "#1eaaff"
+theme.taglist_fg_occupied = "#ffffffaa"
+theme.taglist_fg_empty = "#ffffff11"
+theme.taglist_bg_occupied = "#1c7091aa"
+
+theme.tasklist_disable_task_name = false
+theme.tasklist_fg_focus = "#ffffff"
+theme.tasklist_fg_normal = "#ffffffaa"
+theme.taglist_fg_urgent = "#1eaaff"
+theme.tasklist_bg_focus = "#1c7091aa"
+theme.tasklist_bg_normal = "#1c709166"
 
 -- There are other variable sets
 -- overriding the default one when
@@ -40,15 +52,6 @@ theme.border_marked = "#91231c"
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
-
--- Generate taglist squares:
-local taglist_square_size = dpi(4)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -123,8 +126,6 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
-
--- theme.tasklist_disable_task_name = true
 
 return theme
 

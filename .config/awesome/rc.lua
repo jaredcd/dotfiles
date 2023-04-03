@@ -86,6 +86,8 @@ awful.layout.layouts = {
 }
 -- }}}
 
+awesome.set_preferred_icon_size(32)
+
 -- {{{ Menu
 -- Create a launcher widget and a main menu
 myawesomemenu = {
@@ -239,55 +241,16 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
-
-        layout   = {
-            spacing_widget = {
-                {
-                    forced_width  = 5,
-                    forced_height = 24,
-                    thickness     = 1,
-                    color         = '#777777',
-                    widget        = wibox.widget.separator
-                },
-                valign = 'center',
-                halign = 'center',
-                widget = wibox.container.place,
-            },
-            spacing = 1,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        widget_template = {
-            {
-                wibox.widget.base.make_widget(),
-                forced_height = 1,
-                id            = 'background_role',
-                widget        = wibox.container.background,
-            },
-            {
-                {
-                    id     = 'clienticon',
-                    widget = awful.widget.clienticon,
-                },
-                margins = 5,
-                widget  = wibox.container.margin
-            },
-            nil,
-            create_callback = function(self, c, index, objects) --luacheck: no unused args
-                self:get_children_by_id('clienticon')[1].client = c
-            end,
-            layout = wibox.layout.align.vertical,
-        },
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, bg=gears.color.transparent, border_width=beautiful.useless_gap*2 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
@@ -619,46 +582,6 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
-end)
-
--- Add a titlebar if titlebars_enabled is set to true in the rules.
-client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
-    )
-
-    awful.titlebar(c) : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.iconwidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal
-    }
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
