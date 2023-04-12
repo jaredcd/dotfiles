@@ -1,3 +1,6 @@
 [submodule ".config/awesome/vicious"]
 	path = .config/awesome/vicious
 	url = https://github.com/vicious-widgets/vicious.git
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/NvChad/NvChad.git
