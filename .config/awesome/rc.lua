@@ -379,7 +379,7 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.spawn("dmenu_run") end,
+    awful.key({ modkey },            "r",     function () awful.spawn(gears.filesystem.get_dir("config") .. "menu_run.sh") end,
               {description = "run dmenu", group = "launcher"}),
 
     awful.key({ modkey }, "x",
