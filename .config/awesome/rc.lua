@@ -96,6 +96,7 @@ myawesomemenu = {
    { "edit config", editor_cmd .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
+   { "suspend", function () awful.util.spawn("systemctl suspend", true) end },
 }
 
 local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
